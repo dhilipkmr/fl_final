@@ -175,7 +175,11 @@ describe('Flighter app \n', function() {
     expect(price2).to.contain('2000');
     let price3 = await driver.executeScript(`return ${priceElt3}`);
     expect(price3).to.contain('3000');
-    
+    driver.takeScreenshot().then(
+      function(image, err) {
+          require('fs').writeFile('price-sorting-ascending.png', image, 'base64', function(err) {});
+      }
+    );
 
     await sortPrice.click();
     price1 = await driver.executeScript(`return ${priceElt1}`);
@@ -227,6 +231,11 @@ describe('Flighter app \n', function() {
     expect(rating2).to.contain('4');
     rating3 = await driver.executeScript(`return ${rating3Elt}`);
     expect(rating3).to.contain('1');
+    driver.takeScreenshot().then(
+      function(image, err) {
+          require('fs').writeFile('rating-sorting-descending.png', image, 'base64', function(err) {});
+      }
+    );
   });
 
   it('should change asc/desc text while Sorting based on Price and Rating', async function() {
